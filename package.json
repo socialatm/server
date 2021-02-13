@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "0.1.0",
+  "description": "building a server",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon --watch . --exec mocha ./Server/test/ --recursive || true"
+  },
+  "author": "Ray Peaslee",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.843.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^8.3.0",
+    "mongoose": "^5.11.16",
+    "mongoose-validator": "^2.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "supertest": "^6.1.3"
+  }
+}
