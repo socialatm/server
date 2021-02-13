@@ -9,7 +9,6 @@ const contentValidator =
         message: 'Content should be between {ARGS[0]} and {ARGS[1]} characters'
     });
 
-
 const CommentSchema = new Schema({
     content: {
         type: String,

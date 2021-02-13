@@ -63,7 +63,6 @@ describe('Testing Service methods for comment', () => {
 
 		user2.posts.push(post1);
 		post1.comments.push(comment);
-
 	
 		Promise.all([user.save(),post1.save(), comment.save()])
 		.then(() => {			
@@ -105,7 +104,6 @@ describe('Testing Service methods for comment', () => {
 					})
 			});
 	});
-
 
 	it('DELETE /data/comment/:id removes existing comment from DB', (done) => {	
 		request(app)

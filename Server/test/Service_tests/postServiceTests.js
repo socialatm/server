@@ -87,11 +87,8 @@ describe('Testing Service methods for post', () => {
 						token = JSON.parse(res.text).token;
 						done();
 					})
-
-
 			});
 	});
-
 
 	it('POST /data/post creates a new post', (done) => {
 		request(app)

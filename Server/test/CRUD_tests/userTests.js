@@ -35,8 +35,6 @@ describe('Testing CRUD operations for user model', () => {
 		assert(!user.isNew);
 	});
 
-
-
 	it('reads a user from DB and tests passwordHashing', (done) => {	
 		User.findById(user._id)
 			.select('+password')
