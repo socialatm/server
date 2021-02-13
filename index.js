@@ -34,7 +34,7 @@ app.use(passport.initialize());
 router(app);
 
 app.get('/', function (req,res) {
-    //noinspection JSUnresolvedFunction
+    // noinspection JSUnresolvedFunction
     res.sendFile(__dirname + "/Public/index.html");
 });
 // error handlers

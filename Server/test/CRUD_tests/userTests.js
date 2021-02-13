@@ -4,7 +4,7 @@ const User = require('../../model/user');
 describe('Testing CRUD operations for user model', () => {
 	let user;
 	beforeEach((done) => {
-		//noinspection JSAnnotator
+		// noinspection JSAnnotator
         user = new User({
 			name: {
 				firstName: 'Joe',
