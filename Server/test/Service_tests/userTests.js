@@ -151,7 +151,7 @@ describe('Testing Service methods for user', () => {
 	});
 
 	it('PUTs a new username for user via /data/user/:id', (done) => {
-		let updatedUser = user;
+		const updatedUser = user;
 		updatedUser.username = 'newUserName';
 		request(app)
 			.put(`/data/user/${user._id}`)

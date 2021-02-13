@@ -137,7 +137,7 @@ describe('Testing Service methods for post', () => {
 	});
 
 	it('PUT /data/post/:id a new title to an existing post', (done) => {
-		let updatedPost = post1;
+		const updatedPost = post1;
 		updatedPost.title = 'updated title';
 		request(app)
 			.put(`/data/post/${post1._id}`)
