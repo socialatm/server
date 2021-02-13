@@ -21,7 +21,7 @@ const uploadS3 = (bucketName, file, contentType, key) => {
 };
 
 const deleteS3 = (bucketName, key) => {
-	let params = {};
+	const params = {};
 	params.Key = key;
 	params.Bucket = bucketName;
 

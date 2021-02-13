@@ -29,7 +29,7 @@ const create = (req, res) => {
                     }
                 })
                 .then((post) => {
-                    let comments = post.comments;
+                    const comments = post.comments;
                     comments.sort((a, b) => {
                         return b.updated < a.updated;
                     });

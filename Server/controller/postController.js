@@ -90,7 +90,7 @@ const remove = (req, res) => {
 
 const addLike = (req, res) => {
     let user;
-    let post = Post.findByIdAndUpdate(req.params.id, {
+    const post = Post.findByIdAndUpdate(req.params.id, {
         $addToSet: {
             "likes": req.user._id
         },
