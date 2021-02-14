@@ -80,7 +80,7 @@ UserSchema.methods.generateHash = function (password) {
 
 UserSchema.methods.generateJwt = function () {
 	var expiry = new Date();
-	//JWT valid for 30 minutes
+	// JWT valid for 30 minutes
 	expiry.setTime(expiry.getTime() + (30*60000));
 
 	return jwt.sign({
