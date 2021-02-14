@@ -8,7 +8,7 @@ const s3 = new AWS.S3();
 
 const uploadS3 = (bucketName, file, contentType, key) => {
 
-	let uploadParams = {};
+	const uploadParams = {};
 	uploadParams.Body = file;
 	uploadParams.Key = key;
 	uploadParams.Bucket = bucketName;
