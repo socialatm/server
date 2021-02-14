@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
 const router = require('./Server/routes/router');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -9,10 +8,10 @@ const app = express();
 
 const port = process.env.PORT;
 app.listen(port);
-console.log("App listening on port " + port + " ----> Press cmd-C to terminate");
+console.log(`Server listening on port ${port} ----> Press cmd-C to terminate`);
 
-app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
+app.use(express.json()); //Used to parse JSON bodies
 
 if (process.env.NODE_ENV !== 'test'){
     app.use(express.static(__dirname + '/Public'));
