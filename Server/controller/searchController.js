@@ -17,8 +17,8 @@ const postPopQuery = [{
 
 const search = function (req, res) {
     Promise.all([
-        Post.find({$text :{$search :req.query.string}},{ score : { $meta: "textScore" } }).populate(postPopQuery),
-        User.find({$text :{$search :req.query.string}},{ score : { $meta: "textScore" } })
+        Post.find({$text: {$search: req.query.string}},{ score: { $meta: "textScore" } }).populate(postPopQuery),
+        User.find({$text: {$search: req.query.string}},{ score: { $meta: "textScore" } })
         ])
         .then((data) => {
            const result = data[1].concat(data[0]);
