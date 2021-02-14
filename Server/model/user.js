@@ -66,8 +66,8 @@ UserSchema.pre('remove', function (next) {
       }),
 	Post.remove({_id: {$in: this.posts}}) 
 	])
-	.then(() => {	
-		next();
+	.then(() => {
+	  next();
 	});
 });
 
