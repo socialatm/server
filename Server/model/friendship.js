@@ -30,7 +30,7 @@ FriendshipSchema.methods.declineFriendship = function () {
 };
 
 FriendshipSchema.methods.getFriend = function (requester){
-	if(requester.toString() === this.userOne.toString()) return this.userTwo;
+	if (requester.toString() === this.userOne.toString()) return this.userTwo;
 	return this.userOne;
 };
 

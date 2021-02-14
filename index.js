@@ -14,7 +14,7 @@ console.log("App listening on port " + port + " ----> Press cmd-C to terminate")
 app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());
 
-if(process.env.NODE_ENV !== 'test'){
+if (process.env.NODE_ENV !== 'test'){
     app.use(express.static(__dirname + '/Public'));
     app.use(morgan('dev')); // log every request to the console
     mongoose.Promise = require('bluebird');

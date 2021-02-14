@@ -46,7 +46,7 @@ const getUser = (req, res) => {
         User.findById(req.params.id)
             .then((user) => {
                 if (user !== null) {
-                    if(!user.avatar) user.avatar = "http://placehold.it/160x220";
+                    if (!user.avatar) user.avatar = "http://placehold.it/160x220";
                     res.json(user);
                 } else {
                     res.status(404).json('nothing found');

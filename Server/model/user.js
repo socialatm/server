@@ -91,7 +91,7 @@ UserSchema.methods.generateJwt = function () {
 }
 
 UserSchema.pre('save', function (next) {
-	if(this.isNew) {
+	if (this.isNew) {
         this.password = this.generateHash(this.password);
 	}
 	next();
