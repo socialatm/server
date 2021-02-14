@@ -206,7 +206,7 @@ describe('Testing Service methods for user', () => {
 			.then(() => {
 				user.update({
 					$push: {
-						'posts': [post1, post2, post3]
+						posts: [post1, post2, post3]
 					}
 					})
 					.then(() => {

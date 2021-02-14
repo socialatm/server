@@ -17,7 +17,7 @@ module.exports.login = function(req, res) {
       res.status(200);
       res.json({
         "token" : token,
-        "id": user._id
+        id: user._id
       });
     } else {
       // If user is not found

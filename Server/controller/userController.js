@@ -102,22 +102,22 @@ const getPosts = (req, res) => {
 }
 
 const getFriends = (req, res) => {
-    Friendship.find({
-        '$or': [{
-            'userOne': req.params.id
-        }, {
-            'userTwo': req.params.id
-        }]
+  Friendship.find({
+    $or: [{
+      userOne: req.params.id
+    }, {
+      userTwo: req.params.id
+    }]
+  })
+    .sort({
+      _id: -1
     })
-        .sort({
-            _id: -1
-        })
-        .then((result) => {
-            res.json(result);
-        })
-        .catch((error) => {
-            res.json(error);
-        })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.json(error);
+    })
 }
 
 const update = (req, res) => {
@@ -159,7 +159,7 @@ const addImage = (req, res) => {
     aws.uploadS3('socialatm', req.file.buffer, req.file.mimetype, req.params.id+ new Date().getTime())
         .then((data) => {
             User.findByIdAndUpdate(req.params.id, {
-                'avatar': data.Location
+                avatar: data.Location
             }, {new: true})
                 .then((user) => {
                     if (user) {

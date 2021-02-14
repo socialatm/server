@@ -54,16 +54,16 @@ UserSchema.virtual('postCount').get(function () {
 });
 
 UserSchema.pre('remove', function (next) {
-	const Post = mongoose.model('post');
-	const Friendship = mongoose.model('friendship');
-	Promise.all([
-        Friendship.remove({
-            '$or': [{
-                'userOne': this._id
-            }, {
-                'userTwo': this._id
-            }]
-        }),
+  const Post = mongoose.model('post');
+  const Friendship = mongoose.model('friendship');
+    Promise.all([
+	  Friendship.remove({
+        $or: [{
+		  userOne: this._id
+        }, {
+          userTwo: this._id
+        }]
+      }),
 	Post.remove({_id: {$in: this.posts}}) 
 	])
 	.then(() => {	
