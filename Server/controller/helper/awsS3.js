@@ -1,6 +1,5 @@
 const AWS = require('aws-sdk');
 
-AWS.config.setPromisesDependency(require('bluebird'));
 AWS.config.accessKeyId = process.env.accessKeyId;
 AWS.config.secretAccessKey = process.env.secretAccessKey;
 AWS.config.region = process.env.region;

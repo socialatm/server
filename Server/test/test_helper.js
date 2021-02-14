@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-mongoose.Promise = require('bluebird');
-
 before((done) => {
   mongoose.connect('mongodb://localhost:27017/clonebookdb', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
   mongoose.connection
