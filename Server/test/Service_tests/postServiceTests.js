@@ -25,7 +25,7 @@ describe('Testing Service methods for post', () => {
 			},
 			contact: {
 				email: 'test123@gmx.de',
-				phone: 01234567
+				phone: 11234567
 			}
 		});
 		user2 = new User({
@@ -45,7 +45,7 @@ describe('Testing Service methods for post', () => {
 			},
 			contact: {
 				email: 'test@gmx.de',
-				phone: 012345
+				phone: 112345
 			}
 		});
 

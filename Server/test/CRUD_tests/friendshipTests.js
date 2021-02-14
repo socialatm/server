@@ -22,7 +22,7 @@ describe('Testing CRUD operations for friendship model', () => {
 			},
 			contact: {
 				email: 'test123@gmx.de',
-				phone: 01234567
+				phone: 11234567
 			}
 		});
 		user2 = new User({
@@ -42,7 +42,7 @@ describe('Testing CRUD operations for friendship model', () => {
 			},
 			contact: {
 				email: 'test1234@gmail.com',
-				phone: 012345678
+				phone: 112345678
 			}
 		});
 		Promise.all([user.save(), user2.save()])

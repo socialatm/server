@@ -22,7 +22,7 @@ describe('Testing CRUD operations for user model', () => {
 			},
 			contact: {
 				email: 'test123@gmx.de',
-				phone: 01234567
+				phone: 11234567
 			}
 		});
 		user.save()

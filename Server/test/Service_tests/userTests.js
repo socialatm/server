@@ -25,7 +25,7 @@ describe('Testing Service methods for user', () => {
 			},
 			contact: {
 				email: 'test123@gmx.de',
-				phone: 01234567
+				phone: 11234567
 			}
 		});
 		user2 = new User({
@@ -45,7 +45,7 @@ describe('Testing Service methods for user', () => {
 			},
 			contact: {
 				email: 'test@gmx.de',
-				phone: 012345
+				phone: 112345
 			}
 		});
 		user3 = new User({
@@ -65,7 +65,7 @@ describe('Testing Service methods for user', () => {
 			},
 			contact: {
 				email: 'test1234@gmx.de',
-				phone: 012345678
+				phone: 112345678
 			}
 		});
 		Promise.all([user.save(), user2.save(), user3.save()])
@@ -135,7 +135,7 @@ describe('Testing Service methods for user', () => {
 				},
 				contact: {
 					email: 'test444@gmx.de',
-					phone: 012345444
+					phone: 112345444
 				}
 			})
 			.end((err, response) => {
