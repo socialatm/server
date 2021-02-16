@@ -18,7 +18,7 @@ const savePost = (userId, post, res) => {
 
                     }, {multi: true})
                     .then(() => {
-                        //executes update
+                        // executes update
                     });
             })
     ])// end Promise all
@@ -36,7 +36,7 @@ const create = (req, res) => {
     post.author = req.user._id;
     if (req.file) {
         if (req.body.mediaType !== 'youtube') {
-            //bucketName, file, contentType, title
+            // bucketName, file, contentType, title
             aws.uploadS3('socialatm', req.file.buffer, req.file.mimetype, post._id.toString())
                 .then((data) => {
                     post.media = data.Location;

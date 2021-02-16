@@ -11,8 +11,8 @@ const port = process.env.PORT;
 app.listen(port);
 console.log(`Server listening on port ${port} ----> Press cmd-C to terminate`);
 
-app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
-app.use(express.json()); //Used to parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.json()); // Used to parse JSON bodies
 
 if (process.env.NODE_ENV !== 'test'){
   app.use(express.static(__dirname + '/Public'));

@@ -155,7 +155,7 @@ const remove = (req, res) => {
 }
 
 const addImage = (req, res) => {
-    //bucketName, file, contentType, title
+    // bucketName, file, contentType, title
     aws.uploadS3('socialatm', req.file.buffer, req.file.mimetype, req.params.id+ new Date().getTime())
         .then((data) => {
             User.findByIdAndUpdate(req.params.id, {
