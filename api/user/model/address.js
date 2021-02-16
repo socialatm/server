@@ -72,5 +72,4 @@ const AddressSchema = new Schema({
 		// validate: cityValidator
 	}
 });
-
 module.exports = AddressSchema;
