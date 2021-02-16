@@ -3,11 +3,10 @@ const postServices = require(`${__basedir}/api/post/route/postServices.js`);
 const friendshipServices = require(`${__basedir}/api/friendship/route/friendshipServices`);
 const commentServices = require(`${__basedir}/api/comment/route/commentServices.js`);
 var jwt = require('express-jwt');
-const secret = require(`${__basedir}/config/secrets.json`);
 const SearchController = require(`${__basedir}/api/search/controller/searchController.js`);
 
 var auth = jwt({
-  secret: secret.token
+  secret: process.env.token
 });
 
 module.exports = (app) => {

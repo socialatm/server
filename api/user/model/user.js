@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const Name = require('./name');
 const Address = require('./address');
 const Contact = require('./contact');
-const secret = require(`${__basedir}/config/secrets.json`);
 
 const UserSchema = new Schema({
 	username: {
@@ -73,7 +72,7 @@ UserSchema.pre('remove', function (next) {
 
 UserSchema.methods.generateHash = function (password) {
   const hash = crypto.createHmac('sha256', password)
-  .update(secret.salt)
+  .update(process.env.salt)
   .digest('hex');
   return hash;
 }
@@ -87,7 +86,7 @@ UserSchema.methods.generateJwt = function () {
 	    _id: this._id,
 	    username: this.username,
 	    exp: parseInt(expiry.getTime() / 1000),
-	  }, secret.token); // DO NOT KEEP YOUR SECRET IN THE CODE!
+	  }, process.env.token); // DO NOT KEEP YOUR SECRET IN THE CODE!
 }
 
 UserSchema.pre('save', function (next) {
