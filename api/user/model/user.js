@@ -46,6 +46,8 @@ const UserSchema = new Schema({
 	},{
     usePushEach: true
 });
+
+// used for searches
 UserSchema.index({'$**': 'text'});
 
 UserSchema.virtual('postCount').get(function () {

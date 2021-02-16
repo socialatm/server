@@ -46,6 +46,8 @@ const PostSchema = new Schema({
     },{
     usePushEach: true
 });
+
+// used for searches
 PostSchema.index({'$**': 'text'});
 
 PostSchema.virtual('created').get(function () {
