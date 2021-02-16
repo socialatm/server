@@ -93,7 +93,7 @@ describe('Testing Service methods for comment', () => {
 			.put(`/data/comment/${comment._id}`)
 			.set('Authorization', 'Bearer ' + token)
 			.send({
-				content: 'newcontent',	
+				content: 'newcontent'	
 			})
 			.end((err,response) => {
 				assert(response.text === 'OK');

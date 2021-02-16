@@ -7,7 +7,7 @@ const SearchController = require(`${__basedir}/api/search/controller/searchContr
 
 var auth = jwt({
   secret: process.env.token,
-  algorithms: ['HS256'],
+  algorithms: ['HS256']
 });
 
 module.exports = (app) => {

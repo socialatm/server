@@ -50,24 +50,24 @@ const validate = require('mongoose-validator');
 
 const AddressSchema = new Schema({
 	zip: {
-		type: String,
+		type: String
 		// required: [true, 'Zipcode is required.'],
 		// validate: zipValidator
 	},
 	street: {
-		type: String,
+		type: String
 		// required: [true, 'Street is required.'],
 		// validate: streetValidator
 	},
 	streetNumber: {
-		type: String,
+		type: String
 	},
 	country: {
-		type: String,
+		type: String
 		// validate: countryValidator
 	},
 	city: {
-		type: String,
+		type: String
 		// required: [true, 'City is required.'],
 		// validate: cityValidator
 	}
