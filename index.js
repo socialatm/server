@@ -1,7 +1,8 @@
+global.__basedir = __dirname;
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
-const router = require('./Server/routes/router');
+const router = require('./router');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const app = express();
@@ -26,7 +27,7 @@ if (process.env.NODE_ENV !== 'test'){
     });
 }
 
-require('./Server/config/passport');
+require('./config/passport');
 app.use(passport.initialize());
 
 router(app);

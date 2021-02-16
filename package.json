@@ -4,7 +4,7 @@
   "description": "building a server",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --watch . --exec mocha ./Server/test/ --recursive || true",
+    "test": "nodemon --watch . --exec mocha ./test/ --recursive",
     "start": "nodemon ./index.js"
   },
   "author": "Ray Peaslee",
