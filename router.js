@@ -6,7 +6,8 @@ var jwt = require('express-jwt');
 const SearchController = require(`${__basedir}/api/search/controller/searchController.js`);
 
 var auth = jwt({
-  secret: process.env.token
+  secret: process.env.token,
+  algorithms: ['HS256'],
 });
 
 module.exports = (app) => {
