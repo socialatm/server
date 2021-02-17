@@ -5,10 +5,10 @@ const ContactSchema = new Schema({
 	email: {
 		type: String,
 		required: [true, 'Email is required.'],
-		index: {unique: true},
+		index: {unique: true}
 	},
 	phone: {
-		type: String,
+		type: String
 	}
 });
 

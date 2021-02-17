@@ -8,10 +8,10 @@ const PostSchema = new Schema({
         ref: 'user'
     },
     title: {
-        type: String,
+        type: String
     },
     content: {
-        type: String,
+        type: String
     },
     comments: [{
         type: Schema.Types.ObjectId,

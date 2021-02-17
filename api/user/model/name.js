@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 const NameSchema = new Schema({
 	firstName: {
 		type: String,
-		required: [true, 'Firstname is required.'],
+		required: [true, 'Firstname is required.']
 	},
 	middleNames: [{
-		type: String,
+		type: String
 	}],
 	lastName: {
 		type: String,
-		required: [true, 'Lastname is required.'],
+		required: [true, 'Lastname is required.']
 	}
 });
 
