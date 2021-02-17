@@ -1,21 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // const LikesSchema = require('./likes');
-const validate = require('mongoose-validator');
-
-const titleValidator =
-    validate({
-        validator: 'isLength',
-        arguments: [1, 180],
-        message: 'Title should be between {ARGS[0]} and {ARGS[1]} characters'
-    });
-
-const contentValidator =
-    validate({
-        validator: 'isLength',
-        arguments: [1, 5000],
-        message: 'Content should be between {ARGS[0]} and {ARGS[1]} characters'
-    });
 
 const PostSchema = new Schema({
     author: {
@@ -24,11 +9,9 @@ const PostSchema = new Schema({
     },
     title: {
         type: String,
-        validate: titleValidator
     },
     content: {
         type: String,
-        validate: contentValidator
     },
     comments: [{
         type: Schema.Types.ObjectId,
