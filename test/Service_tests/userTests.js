@@ -117,7 +117,7 @@ describe('Testing Service methods for user', () => {
 
 	it('POST one user via data/user/', (done) => {
 		request(app)
-			.post(`/data/user`)
+			.post(`/data/register`)
 			.send({
 				name: {
 					firstName: 'test',
