@@ -7,10 +7,13 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const app = express();
 const rateLimit = require("express-rate-limit");
+const cors = require('cors');
 
 const port = process.env.PORT;
 app.listen(port);
 console.log(`Server listening on port ${port} ----> Press cmd-C to terminate`);
+
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(express.json()); // Used to parse JSON bodies
