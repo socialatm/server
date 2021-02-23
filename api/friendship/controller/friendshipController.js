@@ -38,21 +38,20 @@ const updateStatus = (req, res) => {
                                 if (!user2.friends.includes(user1)) {
                                     user2.friends.push(user1._id);
                                 }
-
                                 Promise.all([user1.save(), user2.save()])
-                                    .then(() => {
-                                        res.json('OK');
-                                    })
-                                    .catch((err) => {
-                                        res.status(409).json(err);
-                                    });
+                                .then(() => {
+                                  res.json('OK');
+                                })
+                                .catch((err) => {
+                                  res.status(409).json(err);
+                                });
                             });
                     });
             } else {
-                friendship.declineFriendship()
-                    .then(() => {
-                        res.status(200).json("declined");
-                    });
+              friendship.declineFriendship()
+              .then(() => {
+                res.status(200).json("declined");
+              });
             }
         })
         .catch((error) => {
@@ -61,6 +60,6 @@ const updateStatus = (req, res) => {
 }
 
 module.exports = {
-    updateStatus,
-    create
+  updateStatus,
+  create
 }
