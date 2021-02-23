@@ -20,10 +20,8 @@ const CommentSchema = new Schema({
 CommentSchema.virtual('likesCount').get(function () {
     return this.likes.length;
 });
-
-CommentSchema.virtual('created').get( function () {
+CommentSchema.virtual('created').get(function () {
     return this._id.getTimestamp();
 });
-
 const Comment = mongoose.model('comment', CommentSchema);
 module.exports = Comment;
