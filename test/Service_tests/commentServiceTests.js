@@ -126,8 +126,7 @@ describe('Testing Service methods for comment', () => {
 			.end((err,res) => {	
 				Comment.findById(comment._id)
 				 .then((commentN) => {
-
-                     assert(commentN.likesCount === 1);
+                    assert(commentN.likesCount === 1);
 				 	done();
 				 });
 			});

@@ -11,7 +11,6 @@ var auth = jwt({
 });
 
 module.exports = (app) => {
-
 	// USER services
 	userServices(app,auth);
 

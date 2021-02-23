@@ -1,7 +1,6 @@
 const CommentController = require(`${__basedir}/api/comment/controller/commentController.js`);
 
 module.exports = (app, auth) => {	
-
   // POST new comment - creates a new comment for given post
   app.post('/data/comment/:postId',auth, CommentController.create);
 

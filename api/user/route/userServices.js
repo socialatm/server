@@ -3,7 +3,6 @@ const Authentication = require(`${__basedir}/api/services/auth/authentication.js
 const multer = require("multer")();
 
 module.exports = (app, auth) => {
-
 	// Register a new user - creates a new user from the given request.body object
 	app.post('/data/register', UserController.create);	
 

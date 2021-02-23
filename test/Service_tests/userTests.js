@@ -182,7 +182,6 @@ describe('Testing Service methods for user', () => {
 	});
 
 	it('GET all posts, an user with given id has posted', (done) => {
-
 		post1 = new Post({
 			title: 'test title',
 			content: 'test content 123',
