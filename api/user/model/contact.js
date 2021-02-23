@@ -11,5 +11,4 @@ const ContactSchema = new Schema({
 		type: String
 	}
 });
-
 module.exports = ContactSchema;
