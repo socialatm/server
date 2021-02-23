@@ -8,40 +8,40 @@ const Contact = require('./contact');
 
 const UserSchema = new Schema({
 	username: {
-		type: String,
-		required: [true, 'Username is required and has to be unique.'],
-		index: {unique: true}
+	  type: String,
+	  required: [true, 'Username is required and has to be unique.'],
+	  index: {unique: true}
 	},
 	password: {
-		type: String,
-		required: true,
-		select: false
+	  type: String,
+	  required: true,
+	  select: false
 	},
 	name: {
-		type: Name,
-		required: [true, 'Name is required.']
+	  type: Name,
+	  required: [true, 'Name is required.']
 	},
 	age: Number,
 	birthday: Number,
 	address: {
-        type: Address
+      type: Address
 	},
 	contact: {
-		type: Contact,
-		required: [true, 'Contact is required.']
+	  type: Contact,
+	  required: [true, 'Contact is required.']
 	},
 	posts: [{
-		type: Schema.Types.ObjectId,
-		ref: 'post'
+	  type: Schema.Types.ObjectId,
+	  ref: 'post'
 	}],
     friends: [{
-        type: Schema.Types.ObjectId,
-        ref: 'user'
+      type: Schema.Types.ObjectId,
+      ref: 'user'
     }],
 	avatar: String,
 	followingPosts: [{
-		type: Schema.Types.ObjectId,
-		ref: 'post'
+	  type: Schema.Types.ObjectId,
+	  ref: 'post'
 	}]
 	},{
     usePushEach: true
