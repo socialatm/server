@@ -76,5 +76,4 @@ describe('Testing CRUD operations for user model', () => {
 				console.log(err);
 			});
 	});
-
 });

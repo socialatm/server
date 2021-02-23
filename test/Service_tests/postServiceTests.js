@@ -76,7 +76,6 @@ describe('Testing Service methods for post', () => {
 
 		Promise.all([user.save(), user2.save(), friendship.save(), post1.save(), post2.save(), post3.save()])
 			.then(() => {
-
 				request(app)
 					.post('/data/login')
 					.send({
@@ -187,5 +186,4 @@ describe('Testing Service methods for post', () => {
 					});
 			});
 	});
-
 });

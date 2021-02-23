@@ -7,13 +7,11 @@ AWS.config.region = process.env.region;
 const s3 = new AWS.S3();
 
 const uploadS3 = (bucketName, file, contentType, key) => {
-
-	const uploadParams = {};
+    const uploadParams = {};
 	uploadParams.Body = file;
 	uploadParams.Key = key;
 	uploadParams.Bucket = bucketName;
 	uploadParams.ContenType = contentType;
-
 	return s3.upload(uploadParams).promise();
 };
 
@@ -21,7 +19,6 @@ const deleteS3 = (bucketName, key) => {
 	const params = {};
 	params.Key = key;
 	params.Bucket = bucketName;
-
 	return s3.deleteObject(params).promise();
 };
 
