@@ -4,7 +4,7 @@ const User = require(`${__basedir}/api/user/model/user.js`);
 
 module.exports.login = function (req, res) {
 
-  passport.authenticate ('local', function (err, user, info){
+  passport.authenticate('local', function (err, user, info){
     let token;
     // If Passport throws/catches an error
     if (err) {
