@@ -80,22 +80,21 @@ UserSchema.methods.generateHash = function (password) {
 }
 
 UserSchema.methods.generateJwt = function () {
-	var expiry = new Date();
-	// JWT valid for 30 minutes
-	expiry.setTime(expiry.getTime() + (30*60000));
-
-	return jwt.sign({
-	    _id: this._id,
-	    username: this.username,
-	    exp: parseInt(expiry.getTime() / 1000)
-	}, process.env.token);  // DO NOT KEEP YOUR SECRET IN THE CODE!
+  var expiry = new Date();
+  // JWT valid for 30 minutes
+  expiry.setTime(expiry.getTime() + (30*60000));
+  return jwt.sign({
+	_id: this._id,
+	username: this.username,
+	exp: parseInt(expiry.getTime() / 1000)
+  }, process.env.token);  // DO NOT KEEP YOUR SECRET IN THE CODE!
 }
 
 UserSchema.pre('save', function (next) {
-	if (this.isNew) {
-        this.password = this.generateHash(this.password);
-	}
-	next();
+  if (this.isNew) {
+    this.password = this.generateHash(this.password);
+  }
+  next();
 });
 const User = mongoose.model('user', UserSchema);
 module.exports = User;
