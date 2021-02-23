@@ -6,14 +6,14 @@ const savePost = (userId, post, res) => {
     Promise.all([post.save(),
         User.findByIdAndUpdate(userId, {
             $push: {
-                "posts": post._id
+                posts: post._id
             }
         })
             .then((user) => {
                 User.update({_id: {$in: user.friends}},
                     {
                         $addToSet: {
-                            "followingPosts": post
+                            followingPosts: post
                         }
 
                     }, {multi: true})
@@ -89,24 +89,24 @@ const remove = (req, res) => {
 }
 
 const addLike = (req, res) => {
-    let user;
-    const post = Post.findByIdAndUpdate(req.params.id, {
+  let user;
+  const post = Post.findByIdAndUpdate(req.params.id, {
+    $addToSet: {
+      likes: req.user._id
+    },
+    $set: {
+      updated: Date.now()
+    }
+  })
+  .then((post) => {
+    if (post.author.toString() !== req.user._id) {
+      user = User.findByIdAndUpdate(req.user._id, {
         $addToSet: {
-            "likes": req.user._id
-        },
-        $set: {
-            "updated": Date.now()
+          followingPosts: req.params.id
         }
-    })
-        .then((post) => {
-            if (post.author.toString() !== req.user._id) {
-                user = User.findByIdAndUpdate(req.user._id, {
-                    $addToSet: {
-                        "followingPosts": req.params.id
-                    }
-                });
-            }
-        })
+      });
+    }
+  })
 
     Promise.all([post, user])
         .then(() => {

@@ -16,7 +16,7 @@ module.exports.login = function(req, res) {
       token = user.generateJwt();
       res.status(200);
       res.json({
-        "token": token,
+        token: token,
         id: user._id
       });
     } else {

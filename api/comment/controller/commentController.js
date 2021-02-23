@@ -11,10 +11,10 @@ const create = (req, res) => {
     .then((commentFound) => {
       Post.findByIdAndUpdate(req.params.postId, {
         $addToSet: {
-          "comments": commentFound._id
+          comments: commentFound._id
         },
         $set: {
-          "updated": new Date().getTime()
+          updated: new Date().getTime()
         }
       }, 
       {
@@ -72,7 +72,7 @@ const remove = (req, res) => {
 const addLike = (req, res) => {
   Comment.findByIdAndUpdate(req.params.id, {
     $addToSet: {
-      "likes": req.user._id
+      likes: req.user._id
     }
   })
   .then(() => {
@@ -83,7 +83,7 @@ const addLike = (req, res) => {
       if (post.author.toString() !== req.user._id) {
         User.findByIdAndUpdate(req.user._id, {
           $addToSet: {
-            "followingPosts": req.params.id
+            followingPosts: req.params.id
           }
         })
         .then(() => {
