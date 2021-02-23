@@ -19,7 +19,6 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(express.json()); // Used to parse JSON bodies
 
 if (process.env.NODE_ENV !== 'test') {
-  app.use(express.static(__dirname + '/Public'));
   app.use(morgan('dev')); // log every request to the console
   mongoose.connect('mongodb://localhost:27017/socialatm', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
   mongoose.connection
@@ -44,11 +43,6 @@ app.use(passport.initialize());
 
 router(app);
 
-app.get('/', function (req,res) {
-  // noinspection JSUnresolvedFunction
-  res.sendFile(__dirname + "/Public/index.html");
-});
-
 // error handlers - Catch unauthorized errors
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
@@ -56,5 +50,4 @@ app.use(function (err, req, res, next) {
     res.json({message: err.name + ": " + err.message});
   }
 });
-
 module.exports = app;
