@@ -88,7 +88,7 @@ UserSchema.methods.generateJwt = function () {
 	    _id: this._id,
 	    username: this.username,
 	    exp: parseInt(expiry.getTime() / 1000)
-	  }, process.env.token); // DO NOT KEEP YOUR SECRET IN THE CODE!
+	}, process.env.token);  // DO NOT KEEP YOUR SECRET IN THE CODE!
 }
 
 UserSchema.pre('save', function (next) {
@@ -97,7 +97,5 @@ UserSchema.pre('save', function (next) {
 	}
 	next();
 });
-
 const User = mongoose.model('user', UserSchema);
-
 module.exports = User;

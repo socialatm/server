@@ -12,12 +12,12 @@ passport.use(new LocalStrategy(
         // Return if password is wrong
         if (user.generateHash(password) !== user.password) { 
           return done(null, false);
-		}
+        }
         // If credentials are correct, return the user object
-          return done(null, user);
+        return done(null, user);
     	})
-    	.catch((error) => {	
-          return done(err);
+      .catch((error) => {
+        return done(err);
     	})
   }
 ));
