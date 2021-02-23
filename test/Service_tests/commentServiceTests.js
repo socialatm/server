@@ -112,7 +112,7 @@ describe('Testing Service methods for comment', () => {
 			.end((err,response) => {
 				Comment.findById(comment._id)
 					.then((post) => {	
-						assert(post=== null);
+						assert(post === null);
 						done();
 					});
 			});
