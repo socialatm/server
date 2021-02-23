@@ -14,5 +14,4 @@ const NameSchema = new Schema({
 		required: [true, 'Lastname is required.']
 	}
 });
-
 module.exports = NameSchema;
