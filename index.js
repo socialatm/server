@@ -20,7 +20,7 @@ app.use(express.json()); // Used to parse JSON bodies
 
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev')); // log every request to the console
-  mongoose.connect('mongodb://localhost:27017/socialatm', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
+  mongoose.connect('mongodb://localhost:27017/socialatm', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true });
   mongoose.connection
     .once('open', () => {
       console.log('Connection to DB established');
@@ -47,7 +47,7 @@ router(app);
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
     res.status(401);
-    res.json({message: err.name + ": " + err.message});
+    res.json({ message: err.name + ": " + err.message });
   }
 });
 module.exports = app;

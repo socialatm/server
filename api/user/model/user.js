@@ -10,7 +10,7 @@ const UserSchema = new Schema({
 	username: {
 	  type: String,
 	  required: [true, 'Username is required and has to be unique.'],
-	  index: {unique: true}
+	  index: { unique: true }
 	},
 	password: {
 	  type: String,
@@ -48,7 +48,7 @@ const UserSchema = new Schema({
 });
 
 // used for searches
-UserSchema.index({'$**': 'text'});
+UserSchema.index({ '$**': 'text' });
 
 UserSchema.virtual('postCount').get(function () {
 	return this.posts.length;
@@ -65,7 +65,7 @@ UserSchema.pre('remove', function (next) {
           userTwo: this._id
         }]
       }),
-	Post.remove({_id: {$in: this.posts}}) 
+	Post.remove({ _id: {$in: this.posts} }) 
 	])
 	.then(() => {
 	next();

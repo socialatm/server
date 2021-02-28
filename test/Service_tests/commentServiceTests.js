@@ -68,7 +68,7 @@ describe('Testing Service methods for comment', () => {
 		.then(() => {			
 			request(app)
 				.post('/data/login')
-				.send({username: 'joe', password: 'test123'})
+				.send({ username: 'joe', password: 'test123' })
 				.end((err,res) => {	
 					token = JSON.parse(res.text).token;
 					done();
@@ -80,7 +80,7 @@ describe('Testing Service methods for comment', () => {
 		request(app)
 			.post(`/data/comment/${post1._id}`)
 			.set('Authorization', 'Bearer ' + token)
-			.send({content: "blablabla"})
+			.send({ content: "blablabla" })
 			.end((err,response) => {
 				assert(response.body[1].content === 'blablabla');
 				assert(response.body[1].author._id.toString() === user._id.toString());
