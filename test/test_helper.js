@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 before((done) => {
-  mongoose.connect('mongodb://localhost:27017/testdb', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
+  mongoose.connect('mongodb://localhost:27017/testdb', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true });
   mongoose.connection
     .once('open', () => { 
     	console.log('Good To Go!');
@@ -13,7 +13,7 @@ before((done) => {
 });
 
 beforeEach((done) => {	
-	const {users, comments, posts, friendships} = mongoose.connection.collections;
+	const { users, comments, posts, friendships } = mongoose.connection.collections;
   users.drop(() => {	
 		comments.drop(() => {	
 			posts.drop(() => {	
@@ -26,7 +26,7 @@ beforeEach((done) => {
 });
 
 after((done) => {  
-  const {users, comments, posts, friendships} = mongoose.connection.collections;
+  const { users, comments, posts, friendships } = mongoose.connection.collections;
   users.drop(() => {  
     comments.drop(() => { 
       posts.drop(() => {  

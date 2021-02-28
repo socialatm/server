@@ -75,7 +75,7 @@ describe('Testing Service methods for friendship', () => {
 		.then(() => {			
 			request(app)
 				.post('/data/login')
-				.send({username: 'alex', password: 'test123'})
+				.send({ username: 'alex', password: 'test123' })
 				.end((err,res) => {	
 					token = JSON.parse(res.text).token;
 					done();
@@ -87,7 +87,7 @@ describe('Testing Service methods for friendship', () => {
 		request(app)
 			.post('/data/friendship')
 			.set('Authorization', 'Bearer ' + token)
-			.send({id: user._id})
+			.send({ id: user._id })
 			.end((err,response) => {
 				assert(response.body.status === 'PENDING');
 				assert(response.body.userOne.toString() === user3._id.toString());
@@ -96,7 +96,7 @@ describe('Testing Service methods for friendship', () => {
 		request(app)
 			.post('/data/friendship')
 			.set('Authorization', 'Bearer ' + token)
-			.send({id: user3._id})
+			.send({ id: user3._id })
 			.end((err,response) => {
 				assert(response.status === 400);
 				assert(response.text.includes("error"));
@@ -108,7 +108,7 @@ describe('Testing Service methods for friendship', () => {
 		request(app)
 			.put(`/data/friendship/${friendship._id}`)
 			.set('Authorization', 'Bearer ' + token)
-			.send({approved: true})
+			.send({ approved: true })
 			.end((err,response) => {
 				Friendship.findById(friendship._id)
 					.then((friends) => {	
@@ -116,7 +116,7 @@ describe('Testing Service methods for friendship', () => {
 						request(app)
 							.put(`/data/friendship/${friendship._id}`)
 							.set('Authorization', 'Bearer ' + token)
-							.send({declined: true})
+							.send({ declined: true })
 							.end((err,response) => {
 								Friendship.findById(friendship._id)
 									.then((friends) => {	
