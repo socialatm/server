@@ -28,7 +28,7 @@ const updateStatus = (req, res) => {
                 friendship.status = "APPROVED";
                 friendship.save()
                     .then(() => {
-                        User.find({_id: {$in: [friendship.userTwo, friendship.userOne]}})
+                        User.find({ _id: { $in: [friendship.userTwo, friendship.userOne] } })
                             .then((data) => {
                                 const user1 = data[0];
                                 const user2 = data[1];

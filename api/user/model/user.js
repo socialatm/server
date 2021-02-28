@@ -65,7 +65,7 @@ UserSchema.pre('remove', function (next) {
           userTwo: this._id
         }]
       }),
-	Post.remove({ _id: {$in: this.posts} }) 
+	Post.remove({ _id: { $in: this.posts } }) 
 	])
 	.then(() => {
 	next();

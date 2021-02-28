@@ -10,13 +10,13 @@ const savePost = (userId, post, res) => {
             }
         })
             .then((user) => {
-                User.update({_id: {$in: user.friends}},
+                User.update({ _id: { $in: user.friends } },
                     {
                         $addToSet: {
                             followingPosts: post
                         }
 
-                    }, {multi: true})
+                    }, { multi: true })
                     .then(() => {
                         // executes update
                     });

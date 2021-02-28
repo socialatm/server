@@ -25,13 +25,13 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     }],
-    updated: {type: Number}
+    updated: { type: Number }
     },{
     usePushEach: true
 });
 
 // used for searches
-PostSchema.index({'$**': 'text'});
+PostSchema.index({ '$**': 'text' });
 
 PostSchema.virtual('created').get(function () {
     return this._id.getTimestamp();

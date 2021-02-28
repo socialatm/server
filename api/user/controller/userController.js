@@ -160,7 +160,7 @@ const addImage = (req, res) => {
         .then((data) => {
             User.findByIdAndUpdate(req.params.id, {
                 avatar: data.Location
-            }, {new: true})
+            }, { new: true })
                 .then((user) => {
                     if (user) {
                         // res.send('OK');
