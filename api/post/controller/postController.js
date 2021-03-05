@@ -4,29 +4,29 @@ const aws = require(`${__basedir}/api/services/awsS3/awsS3.js`);
 
 const savePost = (userId, post, res) => {
     Promise.all([post.save(),
-        User.findByIdAndUpdate(userId, {
-            $push: {
-                posts: post._id
-            }
-        })
-            .then((user) => {
-                User.update({ _id: { $in: user.friends } },
-                    {
-                        $addToSet: {
-                            followingPosts: post
-                        }
+    User.findByIdAndUpdate(userId, {
+        $push: {
+            posts: post._id
+        }
+    })
+        .then((user) => {
+            User.update({ _id: { $in: user.friends } },
+                {
+                    $addToSet: {
+                        followingPosts: post
+                    }
 
-                    }, { multi: true })
-                    .then(() => {
-                        // executes update
-                    });
-            })
+                }, { multi: true })
+                .then(() => {
+                    // executes update
+                });
+        })
     ])// end Promise all
         .then(() => {
             res.json(post);
         })
         .catch((err) => {
-        console.log(err);
+            console.log(err);
             res.status(500).json(err);
         });
 }
@@ -89,24 +89,24 @@ const remove = (req, res) => {
 }
 
 const addLike = (req, res) => {
-  let user;
-  const post = Post.findByIdAndUpdate(req.params.id, {
-    $addToSet: {
-      likes: req.user._id
-    },
-    $set: {
-      updated: Date.now()
-    }
-  })
-  .then((post) => {
-    if (post.author.toString() !== req.user._id) {
-      user = User.findByIdAndUpdate(req.user._id, {
+    let user;
+    const post = Post.findByIdAndUpdate(req.params.id, {
         $addToSet: {
-          followingPosts: req.params.id
+            likes: req.user._id
+        },
+        $set: {
+            updated: Date.now()
         }
-      });
-    }
-  })
+    })
+        .then((post) => {
+            if (post.author.toString() !== req.user._id) {
+                user = User.findByIdAndUpdate(req.user._id, {
+                    $addToSet: {
+                        followingPosts: req.params.id
+                    }
+                });
+            }
+        })
 
     Promise.all([post, user])
         .then(() => {
