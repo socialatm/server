@@ -6,7 +6,7 @@ module.exports = (app, auth) => {
    */
   app.post('/data/friendship', auth, FriendshipController.create);
 
-  /* PUT friendship 
+  /* PUT friendship
    * updates a given post
    */
   app.put('/data/friendship/:id', auth, FriendshipController.updateStatus);

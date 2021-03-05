@@ -10,6 +10,6 @@ module.exports = (app, auth) => {
   // PUT comment LIKE - updates a given comment and adds a like to given comment
   app.put('/data/comment/:id/like', auth, CommentController.addLike);
 
-  // DELETE comment - deletes a given comment 
+  // DELETE comment - deletes a given comment
   app.delete('/data/comment/:id', auth, CommentController.remove);
 }
