@@ -1,9 +1,9 @@
 const assert = require('assert');
 const Post = require(`${__basedir}/api/post/model/post.js`);
 
-describe('Testing CRUD operations for post model', () => {	
+describe('Testing CRUD operations for post model', () => {
 	let post, timeStamp;
-	beforeEach((done) => {	
+	beforeEach((done) => {
 		post = new Post({
 			title: 'test title',
 			content: 'test content 123',
@@ -11,55 +11,55 @@ describe('Testing CRUD operations for post model', () => {
 			media: 'http://placekitten.com/200/300'
 		});
 		post.save()
-		.then(() => {	
-			timeStamp = post.updated;
-			done();
-		})	
+			.then(() => {
+				timeStamp = post.updated;
+				done();
+			})
 	});
 
-	it('saves a post', () => {	
+	it('saves a post', () => {
 		assert(!post.isNew);
 	});
 
-	it('reads a post from DB', (done) => {	
+	it('reads a post from DB', (done) => {
 		Post.findById(post._id)
-			.then((data) => {	
+			.then((data) => {
 				assert(data.title === 'test title');
 				done();
 			})
-			.catch((error) => {	
+			.catch((error) => {
 				console.log(error);
 			});
 	});
 
-	it('updates a post', (done) => {	
+	it('updates a post', (done) => {
 		post.title = 'new title';
 		post.setMedia('http://youtube.com/svswefa', 'VIDEO');
 		post.save()
-		.then(() => {	
-			Post.findById(post._id)
-			.then((data) => {	
-				assert(data.updated !== timeStamp);
-				assert(data.title === 'new title');
-				assert(data.mediaType === 'VIDEO');
-				done();
+			.then(() => {
+				Post.findById(post._id)
+					.then((data) => {
+						assert(data.updated !== timeStamp);
+						assert(data.title === 'new title');
+						assert(data.mediaType === 'VIDEO');
+						done();
+					})
 			})
-		})
-		.catch((error) => {	
+			.catch((error) => {
 				console.log(error);
 			});
 	});
 
-	it('removes a post from DB', (done) => {	
+	it('removes a post from DB', (done) => {
 		post.remove()
-			.then(() => {	
+			.then(() => {
 				return Post.findById(post._id);
 			})
-			.then((data) => {	
+			.then((data) => {
 				assert(data === null);
 				done();
 			})
-			.catch((err) => {	
+			.catch((err) => {
 				console.log(err)
 			});
 	});

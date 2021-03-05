@@ -2,9 +2,9 @@ const assert = require('assert');
 const Friendship = require(`${__basedir}/api/friendship/model/friendship.js`);
 const User = require(`${__basedir}/api/user/model/user.js`);
 
-describe('Testing CRUD operations for friendship model', () => {	
+describe('Testing CRUD operations for friendship model', () => {
 	let friendship, user, user2;
-	beforeEach((done) => {	
+	beforeEach((done) => {
 		user = new User({
 			name: {
 				firstName: 'Joe',
@@ -46,61 +46,61 @@ describe('Testing CRUD operations for friendship model', () => {
 			}
 		});
 		Promise.all([user.save(), user2.save()])
-			.then(() => {	
+			.then(() => {
 				friendship = new Friendship({
 					userOne: user,
 					userTwo: user2
 				});
 				friendship.save()
-					.then(() => {	
+					.then(() => {
 						done();
 					});
 			});
 	});
 
-	it('saves a friendship', () => {	
+	it('saves a friendship', () => {
 		assert(!friendship.isNew);
 	});
 
-	it('reads a friendship from DB', (done) => {	
+	it('reads a friendship from DB', (done) => {
 		Friendship.findById(friendship._id)
-			.then((data) => {	
+			.then((data) => {
 				assert(data.userOne.toString() === user._id.toString());
 				done();
 			})
-			.catch((error) => {	
+			.catch((error) => {
 				console.log(error);
 			});
 	});
 
-	it('updates a friendship by accepting a friendship', (done) => {	
+	it('updates a friendship by accepting a friendship', (done) => {
 		friendship.approveFriendship();
 		friendship.save()
-		.then(() => {	
-			Friendship.findById(friendship._id)
-			.then((data) => {
-				assert(data.status === 'APPROVED');
-				done();
-			});
-		})
-		.catch((error) => {	
+			.then(() => {
+				Friendship.findById(friendship._id)
+					.then((data) => {
+						assert(data.status === 'APPROVED');
+						done();
+					});
+			})
+			.catch((error) => {
 				console.log(error);
 			});
 	});
 
-	it('removes a friendship from DB by declining a friendship', (done) => {	
+	it('removes a friendship from DB by declining a friendship', (done) => {
 		Friendship.findById(friendship._id)
-			.then((data) => {	
+			.then((data) => {
 				data.declineFriendship()
 			})
-			.then((data) => {	
+			.then((data) => {
 				return Friendship.findById(friendship._id);
 			})
 			.then((data) => {
 				assert(data === null);
 				done();
 			})
-			.catch((err) => {	
+			.catch((err) => {
 				console.log(err)
 			});
 	});

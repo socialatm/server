@@ -4,9 +4,9 @@ const assert = require('assert');
 const Comment = require(`${__basedir}/api/comment/model/comment.js`);
 const User = require(`${__basedir}/api/user/model/user.js`);
 
-describe('Testing CRUD operations for comment model', () => {	
+describe('Testing CRUD operations for comment model', () => {
 	let comment, user;
-	beforeEach((done) => {	
+	beforeEach((done) => {
 		user = new User({
 			name: {
 				firstName: 'Joe',
@@ -28,58 +28,58 @@ describe('Testing CRUD operations for comment model', () => {
 			}
 		});
 		user.save()
-			.then(() => {	
+			.then(() => {
 				comment = new Comment({
-				content: 'test content 123',
-				author: user		
+					content: 'test content 123',
+					author: user
+				});
+				comment.save()
+					.then(() => {
+						done();
+					});
 			});
-			comment.save()
-			.then(() => {	
-				done();
-			});	
-		});		
 	});
 
-	it('saves a comment', () => {	
+	it('saves a comment', () => {
 		assert(!comment.isNew);
 	});
 
-	it('reads a comment from DB', (done) => {	
+	it('reads a comment from DB', (done) => {
 		Comment.findById(comment._id)
-			.then((data) => {	
+			.then((data) => {
 				assert(data.author.toString() === user._id.toString());
 				done();
 			})
-			.catch((error) => {	
+			.catch((error) => {
 				console.log(error);
 			});
 	});
 
-	it('updates a comment', (done) => {	
+	it('updates a comment', (done) => {
 		comment.content = 'new content';
 		comment.save()
-		.then(() => {	
-			Comment.findById(comment._id)
-			.then((data) => {	
-				assert(data.content === 'new content');
-				done();
+			.then(() => {
+				Comment.findById(comment._id)
+					.then((data) => {
+						assert(data.content === 'new content');
+						done();
+					})
 			})
-		})
-		.catch((error) => {	
+			.catch((error) => {
 				console.log(error);
 			});
 	});
 
-	it('removes a comment from DB', (done) => {	
+	it('removes a comment from DB', (done) => {
 		comment.remove()
-			.then(() => {	
+			.then(() => {
 				return Comment.findById(comment._id);
 			})
-			.then((data) => {	
+			.then((data) => {
 				assert(data === null);
 				done();
 			})
-			.catch((err) => {	
+			.catch((err) => {
 				console.log(err)
 			});
 	});
