@@ -15,13 +15,13 @@ before((done) => {
 beforeEach((done) => {	
 	const { users, comments, posts, friendships } = mongoose.connection.collections;
   users.drop(() => {	
-		comments.drop(() => {	
-			posts.drop(() => {	
+    comments.drop(() => {	
+      posts.drop(() => {	
         friendships.drop(() => {
           done();
         });
-			});
-		});
+      });
+    });
 	});
 });
 
