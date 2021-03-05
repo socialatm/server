@@ -91,7 +91,7 @@ describe('Testing Service methods for post', () => {
 
 	it('POST /data/post creates a new post', (done) => {
 		request(app)
-			.post(`/data/post`)
+			.post('/data/post')
 			.set('Authorization', 'Bearer ' + token)
 			.send({
 				title: 'posttest',
@@ -108,7 +108,7 @@ describe('Testing Service methods for post', () => {
 	it('POST /data/post with an attached image and DELETEs it in the end', (done) => {
 		let idPost;
 		request(app)
-			.post(`/data/post`)
+			.post('/data/post')
 			.set('Authorization', 'Bearer ' + token)
 			.field({
 				title: 'posttest',
@@ -117,7 +117,7 @@ describe('Testing Service methods for post', () => {
 			.attach('media', 'test/Service_tests/klein.png')
 			.end((err, response) => {
 				idPost = response.body._id;
-				assert(response.body.media.includes("https://socialatm.s3.us-east-2.amazonaws.com/"));
+				assert(response.body.media.includes('https://socialatm.s3.us-east-2.amazonaws.com/'));
 
 				request(app)
 					.delete(`/data/post/${idPost}`)
