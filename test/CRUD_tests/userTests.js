@@ -5,7 +5,7 @@ describe('Testing CRUD operations for user model', () => {
 	let user;
 	beforeEach((done) => {
 		// noinspection JSAnnotator
-        user = new User({
+		user = new User({
 			name: {
 				firstName: 'Joe',
 				lastName: 'Kunz'
@@ -26,53 +26,53 @@ describe('Testing CRUD operations for user model', () => {
 			}
 		});
 		user.save()
-		.then(() => {	
-			done();
-		});	
+			.then(() => {
+				done();
+			});
 	});
 
-	it('saves a user', () => {	
+	it('saves a user', () => {
 		assert(!user.isNew);
 	});
 
-	it('reads a user from DB and tests passwordHashing', (done) => {	
+	it('reads a user from DB and tests passwordHashing', (done) => {
 		User.findById(user._id)
 			.select('+password')
-			.then((data) => {	
+			.then((data) => {
 				assert(data.name.firstName === 'Joe');
 				assert(data.password === data.generateHash('test123'));
 				done();
 			})
-			.catch((error) => {	
+			.catch((error) => {
 				console.log(error);
 			});
 	});
 
-	it('updates a user', (done) => {	
+	it('updates a user', (done) => {
 		user.name.firstName = 'Alex';
 		user.save()
-		.then(() => {	
-			User.findById(user._id)
-			.then((data) => {	
-				assert(data.name.firstName === 'Alex');
-				done();
-			});
-		})
-		.catch((error) => {	
+			.then(() => {
+				User.findById(user._id)
+					.then((data) => {
+						assert(data.name.firstName === 'Alex');
+						done();
+					});
+			})
+			.catch((error) => {
 				console.log(error);
 			});
 	});
 
-	it('removes a user from DB', (done) => {	
+	it('removes a user from DB', (done) => {
 		user.deleteOne()
-			.then(() => {	
+			.then(() => {
 				return User.findById(user._id);
 			})
-			.then((data) => {	
+			.then((data) => {
 				assert(data === null);
 				done();
 			})
-			.catch((err) => {	
+			.catch((err) => {
 				console.log(err);
 			});
 	});
