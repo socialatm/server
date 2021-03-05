@@ -16,29 +16,29 @@ const create = (req, res) => {
         $set: {
           updated: new Date().getTime()
         }
-      }, 
-      {
-        new: true
-      })
-      .populate({
-        path: 'comments',
-        model: 'comment',
-        populate: {
-          path: 'author',
-          model: 'user',
-          select: 'username +_id + avatar'
-        }
-      })
-      .then((post) => {
-        const comments = post.comments;
-        comments.sort((a, b) => {
-          return b.updated < a.updated;
-        });
+      },
+        {
+          new: true
+        })
+        .populate({
+          path: 'comments',
+          model: 'comment',
+          populate: {
+            path: 'author',
+            model: 'user',
+            select: 'username +_id + avatar'
+          }
+        })
+        .then((post) => {
+          const comments = post.comments;
+          comments.sort((a, b) => {
+            return b.updated < a.updated;
+          });
           res.status(200).json(comments);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -55,18 +55,18 @@ const update = (req, res) => {
       }
     })
     .catch((error) => {
-    res.json(error);
+      res.json(error);
     });
 }
 
 const remove = (req, res) => {
   Comment.findByIdAndRemove(req.params.id)
-  .then(() => {
-    res.send('OK')
-  })
-  .catch((error) => {
-    res.status(500).json(error);
-  });
+    .then(() => {
+      res.send('OK')
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
 }
 
 const addLike = (req, res) => {
@@ -75,33 +75,33 @@ const addLike = (req, res) => {
       likes: req.user._id
     }
   })
-  .then(() => {
-    Post.findOne({
-      comments: req.params.id
-    })
-    .then((post) => {
-      if (post.author.toString() !== req.user._id) {
-        User.findByIdAndUpdate(req.user._id, {
-          $addToSet: {
-            followingPosts: req.params.id
+    .then(() => {
+      Post.findOne({
+        comments: req.params.id
+      })
+        .then((post) => {
+          if (post.author.toString() !== req.user._id) {
+            User.findByIdAndUpdate(req.user._id, {
+              $addToSet: {
+                followingPosts: req.params.id
+              }
+            })
+              .then(() => {
+                res.json('OK');
+              });
+          } else {
+            res.json('OK');
           }
-        })
-        .then(() => {
-          res.json('OK');
         });
-      } else {
-        res.json('OK');
-      }
+    })
+    .catch((error) => {
+      res.status(500).json(error);
     });
-  })
-  .catch((error) => {
-    res.status(500).json(error);
-  });
 }
 
 module.exports = {
-    create,
-    update,
-    remove,
-    addLike
+  create,
+  update,
+  remove,
+  addLike
 };

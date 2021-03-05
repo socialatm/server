@@ -1,8 +1,8 @@
 const PostController = require(`${__basedir}/api/post/controller/postController.js`);
 const multer = require("multer")();
 
-module.exports = (app, auth) => {	
-    // GET all posts the given user follows
+module.exports = (app, auth) => {
+	// GET all posts the given user follows
 	// returns a list of posts the user is following sorted by freshness
 	// app.get('/data/post', auth, PostController.getPostsForUser);
 

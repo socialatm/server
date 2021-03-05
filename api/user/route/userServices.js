@@ -4,7 +4,7 @@ const multer = require("multer")();
 
 module.exports = (app, auth) => {
 	// Register a new user - creates a new user from the given request.body object
-	app.post('/data/register', UserController.create);	
+	app.post('/data/register', UserController.create);
 
 	// Login an existing user
 	app.post('/data/login', Authentication.login);
@@ -20,7 +20,7 @@ module.exports = (app, auth) => {
 
 	// Get all friends for user - returns all friends of given user
 	app.get('/data/user/:id/friends', auth, UserController.getFriends);
-	
+
 	// PUT a new image - add an profile avatar for given user
 	app.put('/data/user/img/:id', auth, multer.single("image"), UserController.addImage);
 
