@@ -117,7 +117,7 @@ const addLike = (req, res) => {
         });
 }
 
-// const getPostsForUser = (req, res) => {	
+// const getPostsForUser = (req, res) => {
 // 	Post.find({
 // 			"followers": req.user._id
 // 		})
