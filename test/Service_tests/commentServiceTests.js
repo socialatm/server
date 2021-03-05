@@ -5,9 +5,9 @@ const request = require('supertest');
 const app = require(`${__basedir}/index.js`);
 const Comment = require(`${__basedir}/api/comment/model/comment.js`);
 
-describe('Testing Service methods for comment', () => {	
-	let user,user2, post1, comment1;
-	beforeEach((done) => {	
+describe('Testing Service methods for comment', () => {
+	let user, user2, post1, comment1;
+	beforeEach((done) => {
 		user = new User({
 			name: {
 				firstName: 'Joe',
@@ -53,7 +53,7 @@ describe('Testing Service methods for comment', () => {
 			content: 'test content 123',
 			mediaType: 'IMG',
 			media: 'http://placekitten.com/200/300',
-            author: user
+			author: user
 		});
 
 		comment = new Comment({
@@ -63,17 +63,17 @@ describe('Testing Service methods for comment', () => {
 
 		user2.posts.push(post1);
 		post1.comments.push(comment);
-	
-		Promise.all([user.save(),post1.save(), comment.save()])
-		.then(() => {			
-			request(app)
-				.post('/data/login')
-				.send({ username: 'joe', password: 'test123' })
-				.end((err,res) => {	
-					token = JSON.parse(res.text).token;
-					done();
-				})
-		});	
+
+		Promise.all([user.save(), post1.save(), comment.save()])
+			.then(() => {
+				request(app)
+					.post('/data/login')
+					.send({ username: 'joe', password: 'test123' })
+					.end((err, res) => {
+						token = JSON.parse(res.text).token;
+						done();
+					})
+			});
 	});
 
 	it('POST /data/comment/:postId sets a comment to given post', (done) => {
@@ -81,37 +81,37 @@ describe('Testing Service methods for comment', () => {
 			.post(`/data/comment/${post1._id}`)
 			.set('Authorization', 'Bearer ' + token)
 			.send({ content: "blablabla" })
-			.end((err,response) => {
+			.end((err, response) => {
 				assert(response.body[1].content === 'blablabla');
 				assert(response.body[1].author._id.toString() === user._id.toString());
 				done();
 			});
 	});
 
-	it('PUT /data/comment/:id updates a comments content', (done) => {	
+	it('PUT /data/comment/:id updates a comments content', (done) => {
 		request(app)
 			.put(`/data/comment/${comment._id}`)
 			.set('Authorization', 'Bearer ' + token)
 			.send({
-				content: 'newcontent'	
+				content: 'newcontent'
 			})
-			.end((err,response) => {
+			.end((err, response) => {
 				assert(response.text === 'OK');
 				Comment.findById(comment._id)
-					.then((commentN) => {	
+					.then((commentN) => {
 						assert(commentN.content === 'newcontent');
 						done();
 					})
 			});
 	});
 
-	it('DELETE /data/comment/:id removes existing comment from DB', (done) => {	
+	it('DELETE /data/comment/:id removes existing comment from DB', (done) => {
 		request(app)
 			.delete(`/data/comment/${comment._id}`)
 			.set('Authorization', 'Bearer ' + token)
-			.end((err,response) => {
+			.end((err, response) => {
 				Comment.findById(comment._id)
-					.then((post) => {	
+					.then((post) => {
 						assert(post === null);
 						done();
 					});
@@ -123,12 +123,12 @@ describe('Testing Service methods for comment', () => {
 			.put(`/data/comment/${comment._id}/like`)
 			.set('Authorization', 'Bearer ' + token)
 			.expect(200)
-			.end((err,res) => {	
+			.end((err, res) => {
 				Comment.findById(comment._id)
-				 .then((commentN) => {
-                    assert(commentN.likesCount === 1);
-				 	done();
-				 });
+					.then((commentN) => {
+						assert(commentN.likesCount === 1);
+						done();
+					});
 			});
 	});
 });
