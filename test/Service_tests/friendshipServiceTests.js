@@ -99,7 +99,7 @@ describe('Testing Service methods for friendship', () => {
             .send({ id: user3._id })
             .end((err, response) => {
                 assert(response.status === 400);
-                assert(response.text.includes("error"));
+                assert(response.text.includes('error'));
                 done();
             });
     });

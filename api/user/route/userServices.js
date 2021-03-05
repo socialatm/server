@@ -22,7 +22,7 @@ module.exports = (app, auth) => {
     app.get('/data/user/:id/friends', auth, UserController.getFriends);
 
     // PUT a new image - add an profile avatar for given user
-    app.put('/data/user/img/:id', auth, multer.single("image"), UserController.addImage);
+    app.put('/data/user/img/:id', auth, multer.single('image'), UserController.addImage);
 
     // PUT user - updates a given user
     app.put('/data/user/:id', auth, UserController.update);

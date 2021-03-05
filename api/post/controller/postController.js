@@ -110,7 +110,7 @@ const addLike = (req, res) => {
 
     Promise.all([post, user])
         .then(() => {
-            res.send("OK");
+            res.send('OK');
         })
         .catch((error) => {
             res.json(error);
