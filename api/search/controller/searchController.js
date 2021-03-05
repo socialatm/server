@@ -17,12 +17,12 @@ const postPopQuery = [{
 
 const search = function (req, res) {
     Promise.all([
-        Post.find({ $text: { $search: req.query.string } },{ score: { $meta: "textScore" } }).populate(postPopQuery),
-        User.find({ $text: { $search: req.query.string } },{ score: { $meta: "textScore" } })
+        Post.find({ $text: { $search: req.query.string } }, { score: { $meta: "textScore" } }).populate(postPopQuery),
+        User.find({ $text: { $search: req.query.string } }, { score: { $meta: "textScore" } })
         ])
         .then((data) => {
            const result = data[1].concat(data[0]);
-           result.sort((a,b) => {
+           result.sort((a, b) => {
                 return a.score - b.score;
            })
             res.json(result);

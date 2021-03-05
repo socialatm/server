@@ -26,7 +26,7 @@ const PostSchema = new Schema({
         ref: 'user'
     }],
     updated: { type: Number }
-    },{
+    }, {
     usePushEach: true
 });
 
