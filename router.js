@@ -12,16 +12,16 @@ var auth = jwt({
 
 module.exports = (app) => {
 	// USER services
-	userServices(app,auth);
+	userServices(app, auth);
 
 	// POST services
-	postServices(app,auth);
+	postServices(app, auth);
 
 	// FRIENDSHIP services
-	friendshipServices(app,auth);
+	friendshipServices(app, auth);
 
 	// COMMENTS services
-	commentServices(app,auth);
+	commentServices(app, auth);
 
     // Search service
     app.get('/data/search', auth, SearchController.search);

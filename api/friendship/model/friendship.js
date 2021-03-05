@@ -14,7 +14,7 @@ const FriendshipSchema = new Schema({
   },
   status: {
 	type: String,
-	enum: ['PENDING','APPROVED'],
+	enum: ['PENDING', 'APPROVED'],
 	default: 'PENDING'
   }
 });
