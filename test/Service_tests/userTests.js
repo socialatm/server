@@ -141,8 +141,8 @@ describe('Testing Service methods for user', () => {
 			.end((err, response) => {
 				assert(response.status === 200);
 				User.findOne({
-						username: 'testuser'
-					})
+					username: 'testuser'
+				})
 					.then((user) => {
 						assert(user.name.firstName = 'test');
 						done();
@@ -199,7 +199,7 @@ describe('Testing Service methods for user', () => {
 			content: 'test content 3',
 			mediaType: 'IMG',
 			media: 'http://placekitten.com/200/300',
-            author: user._id
+			author: user._id
 		});
 		Promise.all([post1.save(), post2.save(), post3.save()])
 			.then(() => {
@@ -207,7 +207,7 @@ describe('Testing Service methods for user', () => {
 					$push: {
 						posts: [post1, post2, post3]
 					}
-					})
+				})
 					.then(() => {
 						request(app)
 							.get(`/data/user/${user._id}/posts`)
