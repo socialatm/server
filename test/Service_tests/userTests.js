@@ -6,267 +6,267 @@ const request = require('supertest');
 const app = require(`${__basedir}/index.js`);
 
 describe('Testing Service methods for user', () => {
-	let user, user2, user3, post1, post2, post3, friendship, friendship2, friendship3, token;
-	beforeEach((done) => {
-		user = new User({
-			name: {
-				firstName: 'Joe',
-				lastName: 'Kunz'
-			},
-			username: 'joe',
-			password: 'test123',
-			age: '27',
-			address: {
-				zip: '12053',
-				city: 'Berlin',
-				street: 'Herrmannstrasse',
-				streetNumber: 222,
-				country: 'Deutschland'
-			},
-			contact: {
-				email: 'test123@gmx.de',
-				phone: 11234567
-			}
-		});
-		user2 = new User({
-			name: {
-				firstName: 'Konstantin',
-				lastName: 'Schall'
-			},
-			username: 'konsi',
-			password: 'test123',
-			age: '27',
-			address: {
-				zip: '12053',
-				city: 'Berlin',
-				street: 'Herrmannstrasse',
-				streetNumber: 222,
-				country: 'Deutschland'
-			},
-			contact: {
-				email: 'test@gmx.de',
-				phone: 112345
-			}
-		});
-		user3 = new User({
-			name: {
-				firstName: 'Alex',
-				lastName: 'Rosin'
-			},
-			username: 'alex',
-			password: 'test123',
-			age: '27',
-			address: {
-				zip: '12053',
-				city: 'Berlin',
-				street: 'Herrmannstrasse',
-				streetNumber: 222,
-				country: 'Deutschland'
-			},
-			contact: {
-				email: 'test1234@gmx.de',
-				phone: 112345678
-			}
-		});
-		Promise.all([user.save(), user2.save(), user3.save()])
-			.then(() => {
-				request(app)
-					.post('/data/login')
-					.send({
-						username: 'alex',
-						password: 'test123'
-					})
-					.end((err, res) => {
-						token = JSON.parse(res.text).token;
-						done();
-					})
-			});
-	});
+    let user, user2, user3, post1, post2, post3, friendship, friendship2, friendship3, token;
+    beforeEach((done) => {
+        user = new User({
+            name: {
+                firstName: 'Joe',
+                lastName: 'Kunz'
+            },
+            username: 'joe',
+            password: 'test123',
+            age: '27',
+            address: {
+                zip: '12053',
+                city: 'Berlin',
+                street: 'Herrmannstrasse',
+                streetNumber: 222,
+                country: 'Deutschland'
+            },
+            contact: {
+                email: 'test123@gmx.de',
+                phone: 11234567
+            }
+        });
+        user2 = new User({
+            name: {
+                firstName: 'Konstantin',
+                lastName: 'Schall'
+            },
+            username: 'konsi',
+            password: 'test123',
+            age: '27',
+            address: {
+                zip: '12053',
+                city: 'Berlin',
+                street: 'Herrmannstrasse',
+                streetNumber: 222,
+                country: 'Deutschland'
+            },
+            contact: {
+                email: 'test@gmx.de',
+                phone: 112345
+            }
+        });
+        user3 = new User({
+            name: {
+                firstName: 'Alex',
+                lastName: 'Rosin'
+            },
+            username: 'alex',
+            password: 'test123',
+            age: '27',
+            address: {
+                zip: '12053',
+                city: 'Berlin',
+                street: 'Herrmannstrasse',
+                streetNumber: 222,
+                country: 'Deutschland'
+            },
+            contact: {
+                email: 'test1234@gmx.de',
+                phone: 112345678
+            }
+        });
+        Promise.all([user.save(), user2.save(), user3.save()])
+            .then(() => {
+                request(app)
+                    .post('/data/login')
+                    .send({
+                        username: 'alex',
+                        password: 'test123'
+                    })
+                    .end((err, res) => {
+                        token = JSON.parse(res.text).token;
+                        done();
+                    })
+            });
+    });
 
-	it('gets a list of users with given criteria via GET data/user', (done) => {
-		request(app)
-			.get('/data/user')
-			.set('Authorization', 'Bearer ' + token)
-			.end((err, response) => {
-				assert(response.body.length === 3);
-			});
-		request(app)
-			.get('/data/user?name.firstName=Joe')
-			.set('Authorization', 'Bearer ' + token)
-			.end((err, response) => {
-				assert(response.body[0].username === user.username);
-			});
-		request(app)
-			.get('/data/user?address.city=Berlin')
-			.set('Authorization', 'Bearer ' + token)
-			.end((err, response) => {
-				assert(response.body.length === 3);
-				done();
-			});
-	});
+    it('gets a list of users with given criteria via GET data/user', (done) => {
+        request(app)
+            .get('/data/user')
+            .set('Authorization', 'Bearer ' + token)
+            .end((err, response) => {
+                assert(response.body.length === 3);
+            });
+        request(app)
+            .get('/data/user?name.firstName=Joe')
+            .set('Authorization', 'Bearer ' + token)
+            .end((err, response) => {
+                assert(response.body[0].username === user.username);
+            });
+        request(app)
+            .get('/data/user?address.city=Berlin')
+            .set('Authorization', 'Bearer ' + token)
+            .end((err, response) => {
+                assert(response.body.length === 3);
+                done();
+            });
+    });
 
-	it('GET one user via data/user/:id', (done) => {
-		request(app)
-			.get(`/data/user/${user._id}`)
-			.set('Authorization', 'Bearer ' + token)
-			.end((err, response) => {
-				assert(response.body.username === user.username);
-				done();
-			});
-	});
+    it('GET one user via data/user/:id', (done) => {
+        request(app)
+            .get(`/data/user/${user._id}`)
+            .set('Authorization', 'Bearer ' + token)
+            .end((err, response) => {
+                assert(response.body.username === user.username);
+                done();
+            });
+    });
 
-	it('POST one user via data/user/', (done) => {
-		request(app)
-			.post(`/data/register`)
-			.send({
-				name: {
-					firstName: 'test',
-					lastName: 'test'
-				},
-				username: 'testuser',
-				password: 'test123',
-				age: '27',
-				address: {
-					zip: '12053',
-					city: 'Berlin',
-					street: 'Herrmannstrasse',
-					streetNumber: 222,
-					country: 'Deutschland'
-				},
-				contact: {
-					email: 'test444@gmx.de',
-					phone: 112345444
-				}
-			})
-			.end((err, response) => {
-				assert(response.status === 200);
-				User.findOne({
-					username: 'testuser'
-				})
-					.then((user) => {
-						assert(user.name.firstName = 'test');
-						done();
-					});
-			});
-	});
+    it('POST one user via data/user/', (done) => {
+        request(app)
+            .post(`/data/register`)
+            .send({
+                name: {
+                    firstName: 'test',
+                    lastName: 'test'
+                },
+                username: 'testuser',
+                password: 'test123',
+                age: '27',
+                address: {
+                    zip: '12053',
+                    city: 'Berlin',
+                    street: 'Herrmannstrasse',
+                    streetNumber: 222,
+                    country: 'Deutschland'
+                },
+                contact: {
+                    email: 'test444@gmx.de',
+                    phone: 112345444
+                }
+            })
+            .end((err, response) => {
+                assert(response.status === 200);
+                User.findOne({
+                    username: 'testuser'
+                })
+                    .then((user) => {
+                        assert(user.name.firstName = 'test');
+                        done();
+                    });
+            });
+    });
 
-	it('PUTs a new username for user via /data/user/:id', (done) => {
-		const updatedUser = user;
-		updatedUser.username = 'newUserName';
-		request(app)
-			.put(`/data/user/${user._id}`)
-			.set('Authorization', 'Bearer ' + token)
-			.send(updatedUser)
-			.expect(200)
-			.end((err, response) => {
-				assert(response.status === 200);
-				User.findById(user._id)
-					.then((user) => {
-						assert(user.userName = 'newUserName');
-						done();
-					});
-			});
-	});
+    it('PUTs a new username for user via /data/user/:id', (done) => {
+        const updatedUser = user;
+        updatedUser.username = 'newUserName';
+        request(app)
+            .put(`/data/user/${user._id}`)
+            .set('Authorization', 'Bearer ' + token)
+            .send(updatedUser)
+            .expect(200)
+            .end((err, response) => {
+                assert(response.status === 200);
+                User.findById(user._id)
+                    .then((user) => {
+                        assert(user.userName = 'newUserName');
+                        done();
+                    });
+            });
+    });
 
-	it('removes a user from DB via DELETE /data/user/:id', (done) => {
-		request(app)
-			.delete(`/data/user/${user._id}`)
-			.set('Authorization', 'Bearer ' + token)
-			.end((err, response) => {
-				User.findById(user._id)
-					.then((user) => {
-						assert(user === null);
-						done();
-					});
-			});
-	});
+    it('removes a user from DB via DELETE /data/user/:id', (done) => {
+        request(app)
+            .delete(`/data/user/${user._id}`)
+            .set('Authorization', 'Bearer ' + token)
+            .end((err, response) => {
+                User.findById(user._id)
+                    .then((user) => {
+                        assert(user === null);
+                        done();
+                    });
+            });
+    });
 
-	it('GET all posts, an user with given id has posted', (done) => {
-		post1 = new Post({
-			title: 'test title',
-			content: 'test content 123',
-			mediaType: 'IMG',
-			media: 'http://placekitten.com/200/300'
-		});
-		post2 = new Post({
-			title: 'test title2',
-			content: 'test content 2',
-			mediaType: 'IMG',
-			media: 'http://placekitten.com/200/300'
-		});
-		post3 = new Post({
-			title: 'test title3',
-			content: 'test content 3',
-			mediaType: 'IMG',
-			media: 'http://placekitten.com/200/300',
-			author: user._id
-		});
-		Promise.all([post1.save(), post2.save(), post3.save()])
-			.then(() => {
-				user.update({
-					$push: {
-						posts: [post1, post2, post3]
-					}
-				})
-					.then(() => {
-						request(app)
-							.get(`/data/user/${user._id}/posts`)
-							.set('Authorization', 'Bearer ' + token)
-							.end((err, response) => {
-								assert(response.body.length === 3);
-								assert(response.body[0].updated >= response.body[1].updated);
-								done();
-							});
-					});
-			});
-	});
+    it('GET all posts, an user with given id has posted', (done) => {
+        post1 = new Post({
+            title: 'test title',
+            content: 'test content 123',
+            mediaType: 'IMG',
+            media: 'http://placekitten.com/200/300'
+        });
+        post2 = new Post({
+            title: 'test title2',
+            content: 'test content 2',
+            mediaType: 'IMG',
+            media: 'http://placekitten.com/200/300'
+        });
+        post3 = new Post({
+            title: 'test title3',
+            content: 'test content 3',
+            mediaType: 'IMG',
+            media: 'http://placekitten.com/200/300',
+            author: user._id
+        });
+        Promise.all([post1.save(), post2.save(), post3.save()])
+            .then(() => {
+                user.update({
+                    $push: {
+                        posts: [post1, post2, post3]
+                    }
+                })
+                    .then(() => {
+                        request(app)
+                            .get(`/data/user/${user._id}/posts`)
+                            .set('Authorization', 'Bearer ' + token)
+                            .end((err, response) => {
+                                assert(response.body.length === 3);
+                                assert(response.body[0].updated >= response.body[1].updated);
+                                done();
+                            });
+                    });
+            });
+    });
 
-	it('GET all friendships, an user with given id has', (done) => {
-		friendship = new Friendship({
-			userOne: user,
-			userTwo: user2
-		});
-		friendship2 = new Friendship({
-			userOne: user3,
-			userTwo: user
-		});
-		friendship3 = new Friendship({
-			userOne: user2,
-			userTwo: user3
-		});
-		Promise.all([friendship.save(), friendship2.save(), friendship3.save()])
-			.then(() => {
-				request(app)
-					.get(`/data/user/${user._id}/friends`)
-					.set('Authorization', 'Bearer ' + token)
-					.end((err, response) => {
-						assert(response.body.length === 2);
-						done();
-					});
-			})
-	});
+    it('GET all friendships, an user with given id has', (done) => {
+        friendship = new Friendship({
+            userOne: user,
+            userTwo: user2
+        });
+        friendship2 = new Friendship({
+            userOne: user3,
+            userTwo: user
+        });
+        friendship3 = new Friendship({
+            userOne: user2,
+            userTwo: user3
+        });
+        Promise.all([friendship.save(), friendship2.save(), friendship3.save()])
+            .then(() => {
+                request(app)
+                    .get(`/data/user/${user._id}/friends`)
+                    .set('Authorization', 'Bearer ' + token)
+                    .end((err, response) => {
+                        assert(response.body.length === 2);
+                        done();
+                    });
+            })
+    });
 
-	it('PUTs a new avatar for user via /data/user/img/:id', (done) => {
-		request(app)
-			.put(`/data/user/img/${user._id}`)
-			.set('Authorization', 'Bearer ' + token)
-			.attach('image', 'test/Service_tests/klein.png')
-			.end((err, response) => {
-				assert(response.status === 200);
-				User.findById(user._id)
-					.then((user) => {
-						assert(user.avatar.includes('https://socialatm.s3.us-east-2.amazonaws.com/'));
-						request(app)
-							.delete(`/data/user/${user._id}`)
-							.set('Authorization', 'Bearer ' + token)
-							.end((err, response) => {
-								User.findById(user._id)
-									.then((user) => {
-										assert(user === null);
-										done();
-									});
-							});
-					});
-			});
-	});
+    it('PUTs a new avatar for user via /data/user/img/:id', (done) => {
+        request(app)
+            .put(`/data/user/img/${user._id}`)
+            .set('Authorization', 'Bearer ' + token)
+            .attach('image', 'test/Service_tests/klein.png')
+            .end((err, response) => {
+                assert(response.status === 200);
+                User.findById(user._id)
+                    .then((user) => {
+                        assert(user.avatar.includes('https://socialatm.s3.us-east-2.amazonaws.com/'));
+                        request(app)
+                            .delete(`/data/user/${user._id}`)
+                            .set('Authorization', 'Bearer ' + token)
+                            .end((err, response) => {
+                                User.findById(user._id)
+                                    .then((user) => {
+                                        assert(user === null);
+                                        done();
+                                    });
+                            });
+                    });
+            });
+    });
 });
