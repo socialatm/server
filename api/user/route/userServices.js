@@ -1,6 +1,6 @@
 const UserController = require(`${__basedir}/api/user/controller/userController.js`);
 const Authentication = require(`${__basedir}/api/services/auth/authentication.js`);
-const multer = require("multer")();
+const multer = require('multer')();
 
 module.exports = (app, auth) => {
     // Register a new user - creates a new user from the given request.body object
