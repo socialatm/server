@@ -20,12 +20,12 @@ const postPopQuery = [{
 const create = (req, res) => {
     User.create(req.body)
         .then((user) => {
-            user.password = "youdontneedtoknow";
+            user.password = 'youdontneedtoknow';
             res.json(user);
         })
         .catch((error) => {
             if (error.code === 11000) {
-                res.status(406, "username, phonenumber or email are already taken");
+                res.status(406, 'username, phonenumber or email are already taken');
             }
             res.status(500).json(error);
         });
