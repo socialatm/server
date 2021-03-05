@@ -13,7 +13,7 @@ before((done) => {
 });
 
 beforeEach((done) => {	
-	const { users, comments, posts, friendships } = mongoose.connection.collections;
+  const { users, comments, posts, friendships } = mongoose.connection.collections;
   users.drop(() => {	
     comments.drop(() => {	
       posts.drop(() => {	
@@ -22,7 +22,7 @@ beforeEach((done) => {
         });
       });
     });
-	});
+  });
 });
 
 after((done) => {  
