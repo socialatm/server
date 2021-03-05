@@ -121,17 +121,17 @@ const addLike = (req, res) => {
  * const getPostsForUser = (req, res) => {
  *   Post.find({
  *     "followers": req.user._id
- *    })
- * 		.sort({
- * 			updated: -1
- * 		})
- * 		.then((posts) => {
- * 			res.json(posts);
- * 		})
- * 		.catch((error) => {
- * 			res.status(500);
- * 			res.json(error);
- * 		});
+ *   })
+ * 	 .sort({
+ * 	   updated: -1
+ * 	 })
+ * 	 .then((posts) => {
+ * 	   res.json(posts);
+ * 	 })
+ * 	 .catch((error) => {
+ * 	   res.status(500);
+ * 	   res.json(error);
+ * 	 });
  * }
  */
 
